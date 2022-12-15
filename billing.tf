@@ -1,5 +1,6 @@
 /**
  * Copyright 2022 Google LLC
+ * Modified by q.beyond AG
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +30,8 @@ locals {
 # billing account in same org (IAM is in the organization.tf file)
 
 module "billing-export-project" {
-  source          = "../../../modules/project"
+  source          = "qbeyond/project/google"
+  version         = "0.1.0"
   count           = local.billing_org ? 1 : 0
   billing_account = var.billing_account.id
   name            = "billing-exp-0"
@@ -51,7 +53,7 @@ module "billing-export-project" {
 }
 
 module "billing-export-dataset" {
-  source        = "../../../modules/bigquery-dataset"
+  source        = "./modules/bigquery-dataset"
   count         = local.billing_org ? 1 : 0
   project_id    = module.billing-export-project.0.project_id
   id            = "billing_export"
@@ -62,7 +64,8 @@ module "billing-export-dataset" {
 # billing account in a different org
 
 module "billing-organization-ext" {
-  source          = "../../../modules/organization"
+  source          = "qbeyond/organization/google"
+  version         = "0.1.0"
   count           = local.billing_org_ext ? 1 : 0
   organization_id = "organizations/${var.billing_account.organization_id}"
   iam_additive = {

@@ -1,5 +1,6 @@
 /**
  * Copyright 2022 Google LLC
+ * Modified by q.beyond AG
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,7 @@
  */
 
 locals {
-  _tpl_providers = "${path.module}/templates/providers.tf.tpl"
+  _tpl_providers = "${path.module}/assets/templates/providers.tf.tpl"
   # render CI/CD workflow templates
   cicd_workflows = {
     for k, v in local.cicd_repositories : k => templatefile(

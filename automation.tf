@@ -1,5 +1,6 @@
 /**
  * Copyright 2022 Google LLC
+ * Modified by q.beyond AG
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +18,8 @@
 # tfdoc:file:description Automation project and resources.
 
 module "automation-project" {
-  source          = "../../../modules/project"
+  source          = "qbeyond/project/google"
+  version         = "0.1.0"
   billing_account = var.billing_account.id
   name            = "iac-core-0"
   parent = coalesce(
@@ -86,7 +88,8 @@ module "automation-project" {
 # output files bucket
 
 module "automation-tf-output-gcs" {
-  source        = "../../../modules/gcs"
+  source        = "qbeyond/gcs/google"
+  version       = "0.1.0"
   project_id    = module.automation-project.project_id
   name          = "iac-core-outputs-0"
   prefix        = local.prefix
@@ -99,7 +102,8 @@ module "automation-tf-output-gcs" {
 # this stage's bucket and service account
 
 module "automation-tf-bootstrap-gcs" {
-  source        = "../../../modules/gcs"
+  source        = "qbeyond/gcs/google"
+  version       = "0.1.0"
   project_id    = module.automation-project.project_id
   name          = "iac-core-bootstrap-0"
   prefix        = local.prefix
@@ -110,7 +114,8 @@ module "automation-tf-bootstrap-gcs" {
 }
 
 module "automation-tf-bootstrap-sa" {
-  source      = "../../../modules/iam-service-account"
+  source      = "qbeyond/iam-service-account/google"
+  version     = "0.1.0"
   project_id  = module.automation-project.project_id
   name        = "bootstrap-0"
   description = "Terraform organization bootstrap service account."
@@ -129,7 +134,8 @@ module "automation-tf-bootstrap-sa" {
 # cicd stage's bucket and service account
 
 module "automation-tf-cicd-gcs" {
-  source        = "../../../modules/gcs"
+  source        = "qbeyond/gcs/google"
+  version       = "0.1.0"
   project_id    = module.automation-project.project_id
   name          = "iac-core-cicd-0"
   prefix        = local.prefix
@@ -143,7 +149,8 @@ module "automation-tf-cicd-gcs" {
 }
 
 module "automation-tf-cicd-provisioning-sa" {
-  source      = "../../../modules/iam-service-account"
+  source      = "qbeyond/iam-service-account/google"
+  version     = "0.1.0"
   project_id  = module.automation-project.project_id
   name        = "cicd-0"
   description = "Terraform stage 1 CICD service account."
@@ -162,7 +169,8 @@ module "automation-tf-cicd-provisioning-sa" {
 # resource hierarchy stage's bucket and service account
 
 module "automation-tf-resman-gcs" {
-  source        = "../../../modules/gcs"
+  source        = "qbeyond/gcs/google"
+  version       = "0.1.0"
   project_id    = module.automation-project.project_id
   name          = "iac-core-resman-0"
   prefix        = local.prefix
@@ -176,7 +184,8 @@ module "automation-tf-resman-gcs" {
 }
 
 module "automation-tf-resman-sa" {
-  source      = "../../../modules/iam-service-account"
+  source      = "qbeyond/iam-service-account/google"
+  version     = "0.1.0"
   project_id  = module.automation-project.project_id
   name        = "resman-0"
   description = "Terraform stage 1 resman service account."

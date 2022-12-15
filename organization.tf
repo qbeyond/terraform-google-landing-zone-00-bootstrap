@@ -1,5 +1,6 @@
 /**
  * Copyright 2022 Google LLC
+ * Modified by q.beyond AG
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,7 +127,8 @@ locals {
 }
 
 module "organization" {
-  source          = "../../../modules/organization"
+  source          = "qbeyond/organization/google"
+  version         = "0.1.0"
   organization_id = "organizations/${var.organization.id}"
   # human (groups) IAM bindings
   group_iam = {

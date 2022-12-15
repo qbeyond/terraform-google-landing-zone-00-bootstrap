@@ -1,0 +1,9 @@
+#git filter-repo --paths-from-file git-repo-filter-00-bootstrap.txt --force
+
+modules/bigquery-dataset/
+modules/logging-bucket/
+modules/pubsub/
+fast/assets/
+fast/assets/==>assets/
+fast/stages/00-bootstrap/
+fast/stages/00-bootstrap/==>
